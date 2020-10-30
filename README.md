@@ -24,8 +24,8 @@ $content = [
 
 // 必须转换为字符串
 $content = json_encode($content, JSON_UNESCAPED_UNICODE);
-$sm4 = new \SM4Util();
-$encryptContent = $sm4->setKey($key)->encrypt($content);
+$sm4 = new SM4($key);
+$encryptContent = $sm4->encrypt($content);
 var_dump($encryptContent);
 // 加密内容： b4358f5860343dbf2089ba75ee55deca8d922a069413f39cb3f8b64c01048c780ba5f03290642505d65d79c59684d76cf42443047f547c9f29dc2a49f872a2719ce00539058ab1fb5830e8e0c10144b574a87118390baa765b3429ba7afe5d28
 ```
@@ -38,8 +38,8 @@ $key = '35d251411ea04318565f0dbda6ffb6a8'
 // 加密内容
 $content = 'b4358f5860343dbf2089ba75ee55deca8d922a069413f39cb3f8b64c01048c780ba5f03290642505d65d79c59684d76cf42443047f547c9f29dc2a49f872a2719ce00539058ab1fb5830e8e0c10144b574a87118390baa765b3429ba7afe5d28';
 
-$sm4 = new \SM4Util();
-$decryptedContent = $sm4->setKey($key)->decrypt($content);
+$sm4 = new SM4($key);
+$decryptedContent = $sm4->decrypt($content);
 var_dump($decryptedContent);
 ```
 
@@ -54,6 +54,7 @@ var_dump($decryptedContent);
     }
 }
 ```
+> 可以通过 json_encode($content,true) ，转换为数组使用
 
 ## 引用文献
 

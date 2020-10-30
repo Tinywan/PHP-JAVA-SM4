@@ -9,7 +9,7 @@
  * +----------------------------------------------------------
  */
 
-class SM4Util
+class SM4
 {
     const SM4_CK = [
         0x00070e15, 0x1c232a31, 0x383f464d, 0x545b6269,
@@ -52,19 +52,15 @@ class SM4Util
 
     private $block_size = 32;
 
-
-    /**设置加密秘钥
-     *
+    /**
+     * SM4 constructor.
      * @param $key 32个十六进制的字符
-     *
-     * @return $this
      * @throws Exception
      */
-    public function setKey($key)
+    public function __construct($key)
     {
         $this->key = $this->preProcess($key);
         $this->setSkey();
-        return $this;
     }
 
     /**
