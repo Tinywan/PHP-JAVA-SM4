@@ -1,5 +1,3 @@
-package com.sx.common;
-
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.pqc.math.linearalgebra.ByteUtils;
 
@@ -12,9 +10,7 @@ import java.security.Security;
 import java.util.Arrays;
 
 /**
- * @author: WangHe
- * @description:
- * @date: 2020\8\13 0013.
+ * @description:SM4Example
  */
 public class SM4Example {
     private static final String ENCODING = "UTF-8";
