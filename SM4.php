@@ -110,7 +110,6 @@ class SM4
     public function encrypt($plainText)
     {
         $bytes = bin2hex($plainText);
-
         $need_pad_length = $this->block_size - strlen($bytes) % $this->block_size;
         $pad_bytes = str_pad(
             $bytes,
@@ -263,10 +262,10 @@ class SM4
 
         $pad_length = hexdec(substr($decrypt_text_data, -2));
 
-        return strtolower(hex2bin(preg_replace(
+        return hex2bin(preg_replace(
             sprintf("/%s$/", str_repeat(sprintf("%02x", $pad_length), $pad_length)),
             '',
             $decrypt_text_data
-        )));
+        ));
     }
 }
