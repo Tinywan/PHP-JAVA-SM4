@@ -68,7 +68,7 @@ print_r($decryptedJsonContent);
     }
 }
 ```
-> 可以通过 json_decode($content, true) ，转换为数组使用
+> 可以通过 json_decode($decryptedJsonContent, true) ，转换为数组使用
 
 ## 引用文献
 
