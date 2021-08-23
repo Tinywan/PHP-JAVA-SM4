@@ -70,6 +70,48 @@ print_r($decryptedJsonContent);
 ```
 > 可以通过 json_decode($decryptedJsonContent, true) ，转换为数组使用
 
+## Java Base64 加密密文解密
+
+### 加密
+```php
+// 双方约定的key
+$key = 'wuExNti0srT13No1';
+$content = [
+    'name' => 'Tinywan',
+    'School' => 'ZheJiang University',
+    'age' => 24,
+    'github' => [
+        'url' => 'https://github.com/Tinywan',
+        'start' => 2000,
+    ],
+];
+
+$hexKey = bin2hex($key);
+// 必须转换为字符串
+$content = json_encode($content, JSON_UNESCAPED_UNICODE);
+$sm4 = new SecuritySM4($hexKey);
+$encryptContent =  $sm4->encrypt($content);
+$base64encryptContent =  base64_encode(hex2bin($encryptContent));
+print_r($base64encryptContent);
+// 输出：CtVs1kzBAX9cOYpAZtcMCZ8n5mjyULAMZ65VTcGuP9fCv2iE1HCP7HZsJgmsrofLce8hH7I8MMCUgzWSLwPUET3I8bITbWYGTSLEMHkz4DLlklua2ky0FDJwxBqo5d2HnXpyMXaYJF1fT+5ztBgLhk0uBD9/DLSmOhiZIR1PcJc=
+```
+
+### 解密
+```php
+// 双方约定的key
+$key = 'wuExNti0srT13No1';
+$content = 'CtVs1kzBAX9cOYpAZtcMCZ8n5mjyULAMZ65VTcGuP9fCv2iE1HCP7HZsJgmsrofLce8hH7I8MMCUgzWSLwPUET3I8bITbWYGTSLEMHkz4DLlklua2ky0FDJwxBqo5d2HnXpyMXaYJF1fT+5ztBgLhk0uBD9/DLSmOhiZIR1PcJc=';
+
+$hexKey = bin2hex($key);
+$baseDecodeContent = base64_decode($content);
+$encryptContent = bin2hex($baseDecodeContent);
+
+// 开始解密
+$sm4 = new SM4($hexKey);
+$decryptedJsonContent = $sm4->decrypt($encryptContent);
+$origindData = json_decode($decryptedJsonContent,true);
+print_r($origindData);
+```
 ## 引用文献
 
 1. [《PHP实现国密算法SM4》](https://blog.csdn.net/liangxun0712/article/details/78611082)
